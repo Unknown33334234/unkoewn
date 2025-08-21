@@ -1,8 +1,309 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title> Intellipaat </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unkown Shop</title>
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #f5f5f5;
+      font-family: monospace, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    p {
+      color: #cfcfcf;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    nav {
+      margin: 20px 0;
+    }
+
+    nav button {
+      background: #111;
+      border: 1px solid #222;
+      color: #ddd;
+      padding: 8px 16px;
+      margin: 5px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    nav button:hover {
+      background: #222;
+      color: #fff;
+    }
+
+    /* --- Console Style Box --- */
+    .console {
+      background: #000;
+      color: #0f0;
+      text-align: left;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 30px auto;
+      width: 600px;
+      height: 250px;
+      overflow-y: auto;
+      font-size: 14px;
+      font-family: "Courier New", monospace;
+      box-shadow: 0 0 15px rgba(0,255,0,0.3);
+      position: relative;
+      animation: flicker 3s infinite;
+    }
+
+    .console::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,255,0,0.05),
+        rgba(0,255,0,0.05) 2px,
+        transparent 2px,
+        transparent 4px
+      );
+      pointer-events: none;
+    }
+
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0.6; }
+    }
+
+    .caret {
+      display: inline-block;
+      width: 8px;
+      background: #0f0;
+      margin-left: 2px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* --- Pricing Section --- */
+    #pricing {
+      display: none;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    #pricing.show {
+      display: block;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .shop {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 40px auto;
+      max-width: 1000px;
+    }
+
+    .card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 10px;
+      width: 250px;
+      padding: 15px;
+      text-align: left;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 0px 12px rgba(255,255,255,0.05);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 16px;
+      color: #00ffae;
+      margin-bottom: 10px;
+    }
+
+    .buy-btn {
+      background: #00ffae;
+      color: #000;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .buy-btn:hover {
+      background: #00d896;
+    }
+
+    footer {
+      margin: 30px 0;
+      font-size: 13px;
+      color: #777;
+    }
+
+    /* Team Section */
+    #team {
+      display: none;
+      margin: 40px auto;
+      max-width: 600px;
+    }
+
+    .team-member {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 8px;
+      margin: 10px;
+      padding: 15px;
+    }
+  </style>
 </head>
-<body style = "background-image:url('images/github3.jpg'); background-size: 100%">
-<h2 ALIGN=CENTER>Hello world!</h2>
+<body>
+  <h1>Unkown Shop</h1>
+  <p>a minimal shop made for your experience.</p>
+
+  <nav>
+    <button onclick="showSection('features')">Features</button>
+    <button onclick="showSection('pricing')">Pricing</button>
+    <button onclick="showSection('faq')">FAQ</button>
+    <button onclick="showSection('team')">Our Team</button>
+  </nav>
+
+  <!-- Console Section -->
+  <div class="console" id="features">
+    <pre id="console-output"></pre>
+  </div>
+
+  <!-- Pricing / Shop Section -->
+  <div id="pricing">
+    <h2>Our Pricing</h2>
+    <section class="shop">
+      <div class="card">
+        <h3>1 Month</h3>
+        <div class="price">$10.00</div>
+        <button class="buy-btn" onclick="window.open('https://discord.gg/disciples','_blank')">Buy Now</button>
+      </div>
+
+      <div class="card">
+        <h3>5 Months</h3>
+        <div class="price">$40.00</div>
+        <button class="buy-btn" onclick="window.open('https://discord.gg/disciples','_blank')">Buy Now</button>
+      </div>
+
+      <div class="card">
+        <h3>Lifetime</h3>
+        <div class="price">$70.00</div>
+        <button class="buy-btn" onclick="window.open('https://discord.gg/disciples','_blank')">Buy Now</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Team Section -->
+  <div id="team">
+    <h2>Our Team</h2>
+    <div class="team-member">Devastate</div>
+    <div class="team-member">Francys</div>
+  </div>
+
+  <footer>
+    © 2025 Unkown Shop | All Rights Reserved
+  </footer>
+
+  <script>
+    function showSection(sectionId) {
+      document.getElementById("features").style.display = "none";
+      document.getElementById("pricing").classList.remove("show");
+      document.getElementById("team").style.display = "none";
+
+      if (sectionId === "features") {
+        document.getElementById("features").style.display = "block";
+      } else if (sectionId === "pricing") {
+        const pricingSection = document.getElementById("pricing");
+        pricingSection.style.display = "block";
+        setTimeout(() => { pricingSection.classList.add("show"); }, 50);
+      } else if (sectionId === "team") {
+        document.getElementById("team").style.display = "block";
+      }
+    }
+
+    // Console typing effect
+    const lines = [
+      "> Fly",
+      "> Custom GUI.",
+      "> FPS Boost.",
+      "> Anti Udons",
+      "> UspeakSpam",
+      "> Button GUI",
+      "> Keybinds",
+      "> Unicode",
+      "> Force Clone",
+      "> Awaiting next update..."
+    ];
+
+    let index = 0;
+    let charIndex = 0;
+    const speed = 50;
+    const output = document.getElementById("console-output");
+    const caret = document.createElement("span");
+    caret.classList.add("caret");
+    output.appendChild(caret);
+
+    function typeLine() {
+      if (index < lines.length) {
+        const line = lines[index];
+        if (charIndex < line.length) {
+          caret.insertAdjacentText("beforebegin", line.charAt(charIndex));
+          charIndex++;
+          setTimeout(typeLine, speed);
+        } else {
+          caret.insertAdjacentHTML("beforebegin", "<br>");
+          index++;
+          charIndex = 0;
+          setTimeout(typeLine, 400);
+        }
+        output.scrollTop = output.scrollHeight;
+      } else {
+        caret.remove(); // stop cursor when finished
+      }
+    }
+
+    typeLine();
+
+    // Default: show Features on load
+    showSection("features");
+  </script>
 </body>
 </html>
